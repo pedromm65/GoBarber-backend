@@ -2,15 +2,17 @@ import 'reflect-metadata';
 
 import express from 'express';
 import routes from './routes/index';
-import routes1 from './routes/appointments.routes';
+import routesAppointments from './routes/appointments.routes';
+import uploadConfig from './config/upload';
 
 import './database';
 
 const app = express();
 
 app.use(express.json());
+app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
-app.use(routes1);
+app.use(routesAppointments);
 
 app.listen(3333, () => {
   console.log('Server started on port 3333!');
